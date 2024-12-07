@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Automated getNewNumber() Caller</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .controls {
+            margin: 10px 0;
+        }
+        label {
+            display: inline-block;
+            width: 120px;
+        }
+        .slider-container {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        #statusBar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: #f4f4f4;
+            border-top: 1px solid #ccc;
+            padding: 10px;
+            text-align: center;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <h1>Automated getNewNumber() Caller</h1>
+
+    <!-- Input Private Key -->
+    <div class="controls">
+        <label for="privateKeyInput">Private Key:</label>
+        <input type="text" id="privateKeyInput" placeholder="0x..." />
+        <button id="connectWallet">Connect Wallet</button>
+    </div>
+
+    <!-- Gwei Range Sliders -->
+    <div class="controls">
+        <label for="minGwei">Min Gwei:</label>
+        <div class="slider-container">
+            <input type="range" id="minGwei" min="1" max="1000" value="1">
+            <span id="minGweiValue">1</span> Gwei
+        </div>
+    </div>
+    <div class="controls">
+        <label for="maxGwei">Max Gwei:</label>
+        <div class="slider-container">
+            <input type="range" id="maxGwei" min="1" max="1000" value="10">
+            <span id="maxGweiValue">10</span> Gwei
+        </div>
+    </div>
+
+    <!-- Time Range Sliders -->
+    <div class="controls">
+        <label for="minTime">Min Time:</label>
+        <div class="slider-container">
+            <input type="range" id="minTime" min="5" max="120" value="30">
+            <span id="minTimeValue">30</span> seconds
+        </div>
+    </div>
+    <div class="controls">
+        <label for="maxTime">Max Time:</label>
+        <div class="slider-container">
+            <input type="range" id="maxTime" min="5" max="120" value="60">
+            <span id="maxTimeValue">60</span> seconds
+        </div>
+    </div>
+
+    <!-- Start and Stop Buttons -->
+    <div class="controls">
+        <button id="startButton">Start Random Calls</button>
+        <button id="stopButton">Stop</button>
+    </div>
+
+    <!-- Status Messages -->
+    <div id="status" class="status"></div>
+
+    <!-- Status Bar -->
+    <div id="statusBar">Ready to connect wallet...</div>
+
+    <!-- Ethers.js v6 -->
+    <script type="module">
+        import { ethers } from 'https://cdn.jsdelivr.net/npm/ethers@6.0.0/dist/ethers.min.js';
+
+        // Replace with your contract details
+        const contractAddress = "0x523ced1b128b83b73beeb042b947d73f59c94833";
+        let contractAbi;
+
+        // Load ABI from file
+        async function loadAbi() {
+            try {
+                const response = await fetch('./ContractABI.json');
+                if (!response.ok) throw new Error('Failed to load ABI file.');
+                contractAbi = await response.json();
+            } catch (err) {
+                console.error('Failed to load ABI:', err);
+                document.getElementById('statusBar').textContent = `Error: ${err.message}`;
+            }
+        }
+
+        await loadAbi();
+
+        // Example RPC Endpoint (Sepolia testnet)
+        const RPC_ENDPOINT = "https://sepolia.infura.io/v3/183c1e5f97db4902badef4a2182e1fff";
+
+        let provider = null;
+        let wallet;
+        let contract;
+        let stopFlag = false;
+
+        const statusDiv = document.getElementById('status');
+        const statusBar = document.getElementById('statusBar');
+        const privateKeyInput = document.getElementById('privateKeyInput');
+        const connectWalletBtn = document.getElementById('connectWallet');
+        const startButton = document.getElementById('startButton');
+        const stopButton = document.getElementById('stopButton');
+        const minGweiSlider = document.getElementById('minGwei');
+        const maxGweiSlider = document.getElementById('maxGwei');
+        const minGweiValue = document.getElementById('minGweiValue');
+        const maxGweiValue = document.getElementById('maxGweiValue');
+        const minTimeSlider = document.getElementById('minTime');
+        const maxTimeSlider = document.getElementById('maxTime');
+        const minTimeValue = document.getElementById('minTimeValue');
+        const maxTimeValue = document.getElementById('maxTimeValue');
+
+        // Update slider values
+        minGweiSlider.addEventListener('input', () => minGweiValue.textContent = minGweiSlider.value);
+        maxGweiSlider.addEventListener('input', () => maxGweiValue.textContent = maxGweiSlider.value);
+        minTimeSlider.addEventListener('input', () => minTimeValue.textContent = minTimeSlider.value);
+        maxTimeSlider.addEventListener('input', () => maxTimeValue.textContent = maxTimeSlider.value);
+
+        // Connect Wallet
+        connectWalletBtn.addEventListener('click', async () => {
+            const privateKey = privateKeyInput.value.trim();
+
+            if (!privateKey.startsWith('0x') || privateKey.length !== 66) {
+                statusDiv.textContent = "Invalid private key. Please try again.";
+                statusBar.textContent = "Error: Invalid private key.";
+                return;
+            }
+
+            if (!provider) {
+                try {
+                    provider = new ethers.JsonRpcProvider(RPC_ENDPOINT);
+                } catch (error) {
+                    console.error('Error initializing provider:', error);
+                    statusBar.textContent = `Error: ${error.message}`;
+                    return;
+                }
+            }
+
+            try {
+                wallet = new ethers.Wallet(privateKey, provider);
+                contract = new ethers.Contract(contractAddress, contractAbi, wallet);
+
+                statusDiv.textContent = "Wallet connected successfully. Ready to start.";
+                statusBar.textContent = "Wallet connected successfully.";
+            } catch (error) {
+                console.error('Error connecting wallet:', error);
+                statusBar.textContent = `Error: ${error.message}`;
+            }
+        });
+
+        // Start and Stop Logic
+        startButton.addEventListener('click', async () => {
+            stopFlag = false;
+            triggerRandomCall();
+        });
+
+        stopButton.addEventListener('click', () => {
+            stopFlag = true;
+            statusBar.textContent = "Stopping process...";
+        });
+
+        async function triggerRandomCall() {
+            if (stopFlag) {
+                statusBar.textContent = "Process stopped.";
+                return;
+            }
+
+            const randomDelay = getRandomDelay();
+            statusBar.textContent = `Next transaction in ${(randomDelay / 1000).toFixed(1)} seconds...`;
+
+            setTimeout(async () => {
+                if (!stopFlag) {
+                    await sendTransaction();
+                    triggerRandomCall();
+                }
+            }, randomDelay);
+        }
+
+        function getRandomDelay() {
+            const minTime = parseInt(minTimeSlider.value, 10) * 1000;
+            const maxTime = parseInt(maxTimeSlider.value, 10) * 1000;
+            return Math.floor(Math.random() * (maxTime - minTime + 1)) + minTime;
+        }
+
+        async function sendTransaction() {
+            const randomGwei = getRandomGwei();
+            try {
+                const tx = await contract.getNewNumber({ value: ethers.parseUnits(randomGwei.toString(), "gwei") });
+                statusBar.textContent = `Transaction sent: ${tx.hash}, awaiting confirmation...`;
+                await tx.wait();
+                statusBar.textContent = "Transaction confirmed.";
+            } catch (err) {
+                console.error("Transaction failed:", err);
+                statusBar.textContent = `Error: ${err.message}`;
+            }
+        }
+
+        function getRandomGwei() {
+            const minGwei = parseInt(minGweiSlider.value, 10);
+            const maxGwei = parseInt(maxGweiSlider.value, 10);
+            return Math.floor(Math.random() * (maxGwei - minGwei + 1)) + minGwei;
+        }
+    </script>
+</body>
+</html>

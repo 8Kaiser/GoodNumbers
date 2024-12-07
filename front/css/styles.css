@@ -1,0 +1,125 @@
+/* Estilos generales */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: Arial, sans-serif;
+    background-color: #e6e6fa;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    position: relative;
+  }
+  
+  /* Imagen de fondo */
+  .background-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('../../Images/logo5.jpg'); /* Reemplaza por la ruta de tu imagen de fondo */
+    background-size: cover;
+    background-position: center;
+    z-index: -1; /* Coloca la imagen detrás de los demás elementos */
+  }
+  
+  /* Contenedor principal con flexbox */
+  .main-container {
+    display: flex;
+    justify-content: space-between;
+    width: 90%;
+    max-width: 1200px;
+  }
+  
+  /* Contenedor izquierdo con Lorem Ipsum */
+  .left-container {
+    width: 30%;
+    padding: 20px;
+  }
+  
+  .lorem-ipsum {
+    font-size: 14px;
+    color: #4a148c;
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    height: 100%;
+    position: relative;
+  }
+  
+  /* Contenedor derecho (consola) */
+  .right-container {
+    width: 65%;
+    padding: 20px;
+    position: relative;
+  }
+  
+  .top-right-image {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: 100px; /* Ajusta el tamaño según lo necesites */
+    height: auto;
+  }
+  
+  /* Estilos para la consola */
+  .container {
+    background-color: #d1c4e9;
+    padding: 30px;
+    border-radius: 10px;
+    text-align: center;
+  }
+  
+  button {
+    background-color: #7c4dff;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 10px 0;
+    font-size: 16px;
+  }
+  
+  button:hover {
+    background-color: #5e35b1;
+  }
+  
+  h1 {
+    margin-bottom: 20px;
+    color: #4a148c;
+  }
+  
+  .hash-section, .transaction-section {
+    margin-bottom: 20px;
+    text-align: left;
+  }
+  
+  input {
+    padding: 10px;
+    width: 80%;
+    margin: 5px 0 20px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+  }
+  
+  label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+  }
+  
+  #current-hash, #my-hash, #estimated-reward {
+    color: #3f51b5;
+  }
+  
+  #estimated-reward {
+    font-weight: bold;
+  }
+  

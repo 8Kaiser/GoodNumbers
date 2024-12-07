@@ -1,6 +1,6 @@
 // ESTA ES UNA IMPLEMENTACION REALIZADA POR CHATGPT. REVISAR EN PROFUNDIDAD.
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.0;
+pragma solidity ^0.8.28;
 
 /**
  * @title Adversarial Entropy Game

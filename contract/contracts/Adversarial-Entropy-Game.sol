@@ -1,6 +1,6 @@
 
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.19;
+pragma solidity ^0.8.28;
 
 // Imports
 import {IAdversarialEntropyGame} from "./contracts/Adversarial-Entropy-Game_Interface.sol";
@@ -12,8 +12,6 @@ error HashesDontMatch();
 error TransferFailed();
 error InvalidMatchLength();
 error ReentrancyAttempt();
-
-// Interfaces, libraries (already imported above)
 
 /**
  * @title Adversarial Entropy Game

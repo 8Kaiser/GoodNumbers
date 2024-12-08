@@ -1,6 +1,10 @@
 
 # GoodNumbers
 
+GoodNumbers crea entropía en la Blockchain de manera descentralizada a través de agentes que compiten de manera adversarial o altruista para obtener premios o financiar proyectos sociales.
+
+## INTRODUCTION
+
 Good Numbers permite a los usuarios participar en un juego basado en un número de lotería (presentado como un hash hexadecimal) almacenado en la blockchain, con el objetivo de generar entropía descentralizada y que, como resultado, los hashes de estas interacciones sean de libre acceso al ecosistema a través de nuestro contrato. 
 
 Para jugar los participantes envían pequeñas cantidades Ether al contrato (típicamente el wei equivalente a centavos de dólares), lo que modifica el número de la lotería y aumenta el fondo acumulado del juego. Si un jugador consigue que los últimos caracteres del número de lotería coincidan con su dirección de billetera, puede reclamar la mitad de los fondos acumulados. De esta manera, los jugadores adversariales pueden competir por llevarse los fondos cuando les sea económicamente viable.
@@ -14,11 +18,23 @@ En nuestra opinión este balance entre la adversarialidad y el altruismo permite
 
 ### CREDENCIALES NECESARIAS PARA EL DEPLOYMENT
 
+Para poder Deployear GoodNumbers necesitas contar con las siguientes API KEYS:
+
 	Alchemy API KEY
 	Arbiscan API KEY
 	Etherscan API KEY
 
 ### INSTALACION DE DEPENDENCIAS
+
+Adicionalmente vas a requerir contar con las siguientes dependencias:
+
+	NPM
+	NPX
+	Yarn
+	HardHat
+	ethers.js
+
+Que puedes instalar con los siguientes comandos:
 
 	npm init -y 
 	npm install --save-dev hardhat
@@ -29,17 +45,21 @@ En nuestra opinión este balance entre la adversarialidad y el altruismo permite
 
 ### DEPLOYAR EL CONTRATO EN HARDHAT LOCAL
 
+Para Deployar el contracto en un entorno Hardhat local sigue los siguientes pasos:
+
 	Ingresa a la carpeta contract
 	npx hardhat node
 	npx hardhat run scripts/deploy.js --network localhost
 	
-	En MetaMask:		
+	Conectar a una nueva red en MetaMask:		
 		Nombre de la red: Localhost 8545
 		URL de la red: http://127.0.0.1:8545
 		ID de la cadena: 1337 
 		Moneda: ETH
 
 ### DEPLOYAR EL CONTRATO EN SEPOLIA
+
+Para Deployar el contracto en la red de pruebas Sepolia sigue los siguientes pasos:
 
 	Ingresa a la carpeta contract
 	npm install dotenv
@@ -65,6 +85,8 @@ En nuestra opinión este balance entre la adversarialidad y el altruismo permite
 		
 		
 ### DEPLOYAR EN ARBITRUM
+
+Para Deployar el contracto en la red de pruebas Sepolia-Arbitrum sigue los siguientes pasos:
 
 	Ingresa a la carpeta contract
 	npm install hardhat @nomicfoundation/hardhat-toolbox @nomicfoundation/hardhat-verify
@@ -95,10 +117,9 @@ En nuestra opinión este balance entre la adversarialidad y el altruismo permite
 				Obtener el estado actual del contrato
 				
 
-
-
-
 ## API Reference
+
+Puedes interactuar con el contrato utilizando las siguientes funciones:
 
 ### checkNumber()
 
@@ -137,15 +158,12 @@ Uso: Ayuda a los jugadores y administradores a comprender el estado del sistema 
 
 
 
-## Appendix
-
-Any additional information goes here
-
-
 ## Authors
 
-- Diego Gil
-- Danny Grinberg
-- Hoover Zavala
-- Juan Pablo Kaiser
+Autores del proyecto (en orden alfabético):
+
+- Diego Gil - https://github.com/diegog321
+- Danny Grinberg - https://github.com/DannyCodo
+- Hoover Zavala - https://github.com/pseeker33
+- Juan Pablo Kaiser - https://github.com/8Kaiser
 

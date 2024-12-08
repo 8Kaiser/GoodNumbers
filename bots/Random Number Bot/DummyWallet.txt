@@ -1,0 +1,15 @@
+This a dummy wallet for testing purposes. Do not fund with real money!!!
+
+Address		
+0xdc5016Df66A9726bc8fC7EDF6889AA66DB9213C2
+
+Public Key
+035c7483ec7bb1dc0c53ce408d6fe2bc28fddf1aaa955f5b963a0e7fbdcbb7e79c
+
+Private Key
+0x5f62afcd14b4b98d69af6c63e7545fd4533c9ed9448264b53fe3dbbc80ca7467
+
+
+DIRECCION DE UN DEPLOY DEL CONTRATO EN SEPOLIA
+0x523ced1b128b83b73beeb042b947d73f59c94833
+

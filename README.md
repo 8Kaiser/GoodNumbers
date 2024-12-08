@@ -1,19 +1,24 @@
+
 # GoodNumbers
-Hackaton Académica Ethereum  
 
-Generación de Entropía en Redes Blockchain mediante Juegos Adversariales
-Introducción
-Proponemos un juego diseñado para generar entropía en redes blockchain mediante interacciones adversariales. En este sistema, los participantes intentan modificar un número de "lotería" almacenado on-chain a través de una función de recálculo y un monto invertido en la operación. El objetivo es lograr que este número coincida con la dirección de su billetera y, como recompensa, reclamar los fondos acumulados en el contrato inteligente.
+Good Numbers permite a los usuarios participar en un juego basado en un número de lotería (presentado como un hash hexadecimal) almacenado en la blockchain, con el objetivo de generar entropía descentralizada y que, como resultado, los hashes de estas interacciones sean de libre acceso al ecosistema a través de nuestro contrato. 
 
-La dinámica del juego se torna más compleja a medida que aumenta el número de jugadores y el valor acumulado del premio en el contrato, incentivando estrategias avanzadas por parte de los participantes.
+Para jugar los participantes envían pequeñas cantidades Ether al contrato (típicamente el wei equivalente a centavos de dólares), lo que modifica el número de la lotería y aumenta el fondo acumulado del juego. Si un jugador consigue que los últimos caracteres del número de lotería coincidan con su dirección de billetera, puede reclamar la mitad de los fondos acumulados. De esta manera, los jugadores adversariales pueden competir por llevarse los fondos cuando les sea económicamente viable.
 
-CREDENCIALES NECESARIAS
+El contrato también destina un porcentaje de los depósitos a un fondo para financiar proyectos que generen impacto social. Incentivando así la participación de actores altruistas que interactúen con el proyecto generando hashes motivados por el desarrollo del ecosistema y no por la posible recompensa económica. 
+
+En nuestra opinión este balance entre la adversarialidad y el altruismo permite el desarrollo de un sistema sólido, resilente y perdurable en el tiempo, siendo nuestra inspiración la forma en que funcionan los incentivos altruistas y adversariales de las principales Blockchains como Bitcoin y Ethereum.
+
+
+## Deployment
+
+### CREDENCIALES NECESARIAS PARA EL DEPLOYMENT
 
 	Alchemy API KEY
 	Arbiscan API KEY
 	Etherscan API KEY
 
-INSTALACION DE DEPENDENCIAS
+### INSTALACION DE DEPENDENCIAS
 
 	npm init -y 
 	npm install --save-dev hardhat
@@ -22,7 +27,7 @@ INSTALACION DE DEPENDENCIAS
 	npm install --save-dev @nomicfoundation/hardhat-toolbox
 	npx hardhat compile
 
-DEPLOYAR EL CONTRATO EN HARDHAT LOCAL
+### DEPLOYAR EL CONTRATO EN HARDHAT LOCAL
 
 	Ingresa a la carpeta contract
 	npx hardhat node
@@ -34,7 +39,7 @@ DEPLOYAR EL CONTRATO EN HARDHAT LOCAL
 		ID de la cadena: 1337 
 		Moneda: ETH
 
-DEPLOYAR EL CONTRATO EN SEPOLIA
+### DEPLOYAR EL CONTRATO EN SEPOLIA
 
 	Ingresa a la carpeta contract
 	npm install dotenv
@@ -59,7 +64,7 @@ DEPLOYAR EL CONTRATO EN SEPOLIA
 		Obs: "2" es el initialMatchLength que pasaste en el constructor.
 		
 		
-DEPLOYAR EN ARBITRUM
+### DEPLOYAR EN ARBITRUM
 
 	Ingresa a la carpeta contract
 	npm install hardhat @nomicfoundation/hardhat-toolbox @nomicfoundation/hardhat-verify
@@ -89,4 +94,58 @@ DEPLOYAR EN ARBITRUM
 				Llamar al método getNewNumber() con un depósito de ETH
 				Obtener el estado actual del contrato
 				
+
+
+
+
+## API Reference
+
+### checkNumber()
+
+Descripción: Esta función permite consultar el número actual de la lotería almacenado en la blockchain. Es útil para los jugadores y otros contratos que deseen usar este número como parte de cálculos o procesos dependientes de entropía.
+Uso: Simplemente devuelve el número actual sin requerir Ether ni permisos especiales.
+
+### getNewNumber()
+
+Descripción: Modifica el número de lotería almacenado en el contrato, generando un nuevo número basado en el número actual, la dirección del remitente y la cantidad de Ether enviada. Este proceso incrementa la entropía del sistema.
+Requisito: El jugador debe enviar una cantidad mínima de Ether especificada en el contrato para ejecutar esta función.
+Objetivo: Fomenta la participación activa de los jugadores y la generación de números aleatorios resistentes a manipulaciones.
+
+### claimLottery()
+Descripción: Permite a un jugador reclamar los fondos acumulados en el contrato si los últimos caracteres de su dirección de billetera coinciden con los últimos caracteres del número de lotería actual.
+Requisito: El jugador debe cumplir con la condición de coincidencia para poder retirar los fondos.
+Objetivo: Incentivar estrategias adversariales y premiar a los jugadores exitosos.
+
+### claimDevelopmentAndDonation()
+Descripción: Permite al propietario del contrato retirar un porcentaje de los fondos acumulados destinado al desarrollo y donaciones sociales. Solo puede ser ejecutada por la dirección designada como propietaria del contrato (por ejemplo, una multisig).
+Requisito: Accesible únicamente para el administrador del contrato.
+Objetivo: Asegurar que parte de los fondos se destinen al mantenimiento del contrato y al impacto social.
+
+### setMatchLength()
+Descripción: Ajusta la longitud del hash que debe coincidir entre el número de lotería y la dirección de un jugador para reclamar un premio. Este parámetro controla la dificultad del juego.
+Requisito: Solo puede ser ejecutada por el propietario del contrato.
+Objetivo: Adaptar la dificultad del juego según el comportamiento de los jugadores y las necesidades del sistema.
+
+### getContractState()
+Descripción: Proporciona un resumen completo del estado actual del contrato, incluyendo:
+El propietario del contrato.
+El número de lotería actual.
+Los fondos acumulados para premios y donaciones.
+El depósito mínimo requerido para participar.
+La longitud actual de la coincidencia (matchLength).
+Uso: Ayuda a los jugadores y administradores a comprender el estado del sistema de forma centralizada.
+
+
+
+## Appendix
+
+Any additional information goes here
+
+
+## Authors
+
+- Diego Gil
+- Danny Grinberg
+- Hoover Zavala
+- Juan Pablo Kaiser
 

@@ -3,7 +3,8 @@
 pragma solidity ^0.8.28;
 
 // Imports
-import {IAdversarialEntropyGame} from "./contracts/Adversarial-Entropy-Game_Interface.sol";
+import {IAdversarialEntropyGame} from "./Adversarial-Entropy-Game_Interface.sol";
+
 
 // Errors
 error NotAuthorized();

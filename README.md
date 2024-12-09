@@ -1,3 +1,21 @@
+# GoodNumbers
+
+GoodNumbers creates entropy on the blockchain in a decentralized way through agents that compete in either an adversarial or altruistic manner to win prizes or fund social projects.
+
+## INTRODUCTION
+
+Having the goal of generating a decentralized entropy while ensuring that hashes obtained from these interactions are freely accessible to the ecosystem via our contract, GoodNumbers achieves it by allowing users to participate in a lottery-based game (presented as an hexadecimal hash) stored on the blockchain.
+
+To play, participants send a small amount of Ether to the contract (an amount of wei typically equivalent to a few cents). Each contribution modifies the lottery number and increases the accumulated game pool. If a player manages to match the last characters of the lottery with the number his wallet address, he can claim half of the accumulated funds. In this way, adversarial players can compete to win the funds when it becomes economically viable.
+
+The contract allocates a percentage of the deposits to a fund that finances social impact projects. This will encourage the participation of altruistic actors, who’s interaction with the project is motivated by the development of the ecosystem rather than by the potential economic reward – generating additional hashes.
+
+In our opinion, this blend of adversarial and altruistic motivations allows for the development of a more solid, resilient, and enduring system - inspired by a similar mix of altruistic and adversarial incentives seen in major blockchains like Bitcoin and Ethereum.
+
+
+
+
+
 
 # GoodNumbers
 

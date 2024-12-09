@@ -24,7 +24,7 @@ To deploy GoodNumbers, you need to have the following API KEYS:
 
 ### DEPENDENCY INSTALLATION
 
-Additionally, for backend development you will need to have the following dependencies:
+Additionally, you will need to have the following tools and libraries:
 
     NPM
     NPX
@@ -39,27 +39,28 @@ Which you can install with the following commands:
     npx hardhat init
     npm install ethers@^6.1.0
     npm install --save-dev @nomicfoundation/hardhat-toolbox
-    npx hardhat compile
 
-For frontend development we implement React + Vite so you need to install the following:
+For frontend development we implement React + Vite and some other libraries:
 
-	npm create vite@latest
-	npm install
-	npm install ethers
-	npm install prop-types
-	npm install ethers react-toastify @radix-ui/react-icons shadcn-ui
+    npm create vite@latest
+    npm install
+    npm install ethers
+    npm install prop-types
+    npm install ethers react-toastify @radix-ui/react-icons shadcn-ui
 
-Then just run the local server:
+Then just use the next command in order to run the local server:
 
-  npm run dev
+npm run dev
 
-### CONTRACT DEPLOYMENT ON LOCAL HARDHAT HOW TO
+
+### CONTRACT DEPLOYMENT ON LOCAL HARDHAT
 
 To deploy the contract in a local Hardhat environment, follow these steps:
 
-    In the contract folder execute:
-    npx hardhat node
-    npx hardhat run scripts/deploy.js --network localhost
+    In the folder *contract* execute:
+    	npx hardhat compile
+    	npx hardhat node
+    	npx hardhat run scripts/deploy.js --network localhost
 
     In MetaMask, connect to a new network:
     	Nombre de la red: Localhost 8545
@@ -67,65 +68,67 @@ To deploy the contract in a local Hardhat environment, follow these steps:
     	ID de la cadena: 1337
     	Moneda: ETH
 
-### CONTRACT DEPLOYMENT ON SEPOLIA NETWORK HOW TO
+### CONTRACT DEPLOYMENT ON SEPOLIA NETWORK
 
-Para Deployar el contracto en la red de pruebas Sepolia sigue los siguientes pasos:
+To deploy the contract on the Sepolia test network, follow these steps:
 
-    Ingresa a la carpeta contract
-    npm install dotenv
+    In the folder *contract* execute:
+    	npm install dotenv
 
-    Crear el archivo .env y agrega dentro las variables de entorno para el deployment:
+    Create the .env file and add the environment variables for the deployment:
     	SEPOLIA_RPC_URL=https://eth-sepolia.g.alchemy.com/v2/<alchemy api key>
     	ARBITRUM_SEPOLIA_RPC=https://sepolia-rollup.arbitrum.io/rpc
     	PRIVATE_KEY=<private key del owner del contrato sin 0x>
     	ETHERSCAN_API_KEY=<etherscan api key> # opcional, para verificar el contrato
 
-    En MetaMask:
-    	Nombre de la red: Sepolia
-    	URL de la red: sepolia.infura.io
-    	ID de la cadena: 11155111
-    	Moneda: ETH
+    In MetaMask wallet:
+    	Network name: Sepolia
+    	Network URL: sepolia.infura.io
+    	Chain ID: 11155111
+    	Currency: ETH
 
-    Despliega el contrato en Sepolia:
+    Deploy the smart contract on Sepolia:
+    	npx hardhat compile
     	npx hardhat run scripts/deploy.js --network sepolia
 
-    Verifica el contrato (opcional):
+    Contract verification (opcional):
     	npx hardhat verify --network sepolia <direccion del contrato> 2
     	Obs: "2" es el initialMatchLength que pasaste en el constructor.
 
 
 
-### DEPLOYAR EN ARBITRUM
+### CONTRACT DEPLOYMENT ON ARBITRUM NETWORK
 
-Para Deployar el contracto en la red de pruebas Sepolia-Arbitrum sigue los siguientes pasos:
+To deploy the contract on the Sepolia-Arbitrum test network, follow these steps:
 
-    Ingresa a la carpeta contract
-    npm install hardhat @nomicfoundation/hardhat-toolbox @nomicfoundation/hardhat-verify
-    npm install dotenv
+    In the folder *contract* execute:
+    	npm install hardhat @nomicfoundation/hardhat-toolbox @nomicfoundation/hardhat-verify
+    	npm install dotenv
 
     Envia ETHs desde desde la red Sepolia Tesnet hacia Arbitrum:
     	https://bridge.arbitrum.io
 
-    En MetaMask:
-    	Nombre de la red: Arbitrum Sepolia
-    	URL de la red: sepolia-rollup.arbitrum.io/rpc
-    	ID de la cadena: 421614
-    	Moneda: ETH
-    	Explorador de bloques: sepolia-explorer.arbitrum.io
+    In MetaMask wallet:
+    	Network name: Arbitrum Sepolia
+    	Network URL: https://sepolia-rollup.arbitrum.io/rpc
+    	Chain ID: 421614
+    	Currency: ETH
+    	Blockchain explorer: sepolia-explorer.arbitrum.io
 
-    Despliega el contrato en Arbitrum Sepolia:
+    Deploy de contract on Arbitrum Sepolia by entering:
+    	npx hardhat compile
     	npx hardhat run scripts/deploy.js --network arbitrumSepolia
 
-    Verificacion del contrato
-    	Se hará automáticamente en el script
+    Contract verification:
+    	Will be done automatically in the script.
 
-    Interactuar con el contrato mediante el script interact.js
+    Interact with the contract using the interact.js script
     	npx hardhat run scripts/interact.js --network arbitrumSepolia
-    	Obs:
-    		 La interacción consistía en:
-    			Conectarse al contrato desplegado
-    			Llamar al método getNewNumber() con un depósito de ETH
-    			Obtener el estado actual del contrato
+    	Observations:
+    		 The interaction consisted of:
+    			Connecting to the deployed contract
+    			Calling the getNewNumber() method with a deposit of ETH
+    			Retrieving the current state of the contract
 
 
 ## API Reference
@@ -178,7 +181,10 @@ Project authors (in alphabetical order):
 - Diego Gil - https://github.com/diegog321
 - Danny Grinberg - https://github.com/DannyCodo
 - Hoover Zavala - https://github.com/pseeker33
-- Juan Pablo Kaiser - https://github.com/8Kaiser
+- Juan Pablo Kaiser - https://github.com/
+
+---
+<br>
 
 # GoodNumbers
 
@@ -206,7 +212,7 @@ Para poder Deployear GoodNumbers necesitas contar con las siguientes API KEYS:
 
 ### INSTALACION DE DEPENDENCIAS
 
-Adicionalmente vas a requerir contar con las siguientes dependencias:
+Adicionalmente vas a requerir contar con las siguientes herramientas y librerias:
 
     NPM
     NPX
@@ -216,18 +222,30 @@ Adicionalmente vas a requerir contar con las siguientes dependencias:
 
 Que puedes instalar con los siguientes comandos:
 
-    npm init -y
+  	npm init -y
     npm install --save-dev hardhat
     npx hardhat init
     npm install ethers@^6.1.0
     npm install --save-dev @nomicfoundation/hardhat-toolbox
-    npx hardhat compile
+
+Para el desarrollo frontend implementamos React + Vite y algunas otras bibliotecas:
+
+	npm create vite@latest
+	npm install
+	npm install ethers
+	npm install prop-types
+	npm install ethers react-toastify @radix-ui/react-icons shadcn-ui
+
+Luego simplemente usa el siguiente comando para ejecutar el servidor local:
+
+	npm run dev
 
 ### DEPLOYAR EL CONTRATO EN HARDHAT LOCAL
 
 Para Deployar el contracto en un entorno Hardhat local sigue los siguientes pasos:
 
     Ingresa a la carpeta contract
+    npx hardhat compile
     npx hardhat node
     npx hardhat run scripts/deploy.js --network localhost
 
@@ -241,8 +259,8 @@ Para Deployar el contracto en un entorno Hardhat local sigue los siguientes paso
 
 Para Deployar el contracto en la red de pruebas Sepolia sigue los siguientes pasos:
 
-    Ingresa a la carpeta contract
-    npm install dotenv
+    Ejecuta en la carpeta contract
+    	npm install dotenv
 
     Crear el archivo .env y agrega dentro las variables de entorno para el deployment:
     	SEPOLIA_RPC_URL=https://eth-sepolia.g.alchemy.com/v2/<alchemy api key>
@@ -257,6 +275,7 @@ Para Deployar el contracto en la red de pruebas Sepolia sigue los siguientes pas
     	Moneda: ETH
 
     Despliega el contrato en Sepolia:
+    	npx hardhat compile
     	npx hardhat run scripts/deploy.js --network sepolia
 
     Verifica el contrato (opcional):
@@ -269,7 +288,7 @@ Para Deployar el contracto en la red de pruebas Sepolia sigue los siguientes pas
 
 Para Deployar el contracto en la red de pruebas Sepolia-Arbitrum sigue los siguientes pasos:
 
-    Ingresa a la carpeta contract
+    Ingresa a la carpeta contract, los comandos:
     npm install hardhat @nomicfoundation/hardhat-toolbox @nomicfoundation/hardhat-verify
     npm install dotenv
 
@@ -278,12 +297,13 @@ Para Deployar el contracto en la red de pruebas Sepolia-Arbitrum sigue los sigui
 
     En MetaMask:
     	Nombre de la red: Arbitrum Sepolia
-    	URL de la red: sepolia-rollup.arbitrum.io/rpc
+    	URL de la red: https://sepolia-rollup.arbitrum.io/rpc
     	ID de la cadena: 421614
     	Moneda: ETH
     	Explorador de bloques: sepolia-explorer.arbitrum.io
 
     Despliega el contrato en Arbitrum Sepolia:
+    	npx hardhat compile
     	npx hardhat run scripts/deploy.js --network arbitrumSepolia
 
     Verificacion del contrato

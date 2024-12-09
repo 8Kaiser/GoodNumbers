@@ -197,7 +197,7 @@ function App() {
             <p>Conectado: {account}</p>
             <p>Saldo: {userBalance ? `${userBalance} ETH` : "Cargando..."}</p>
             {!isPlaying ? (
-              <button onClick={playGame}>Jugar</button>
+              <button onClick={playGame}>A la partida</button>
             ) : (
               <ContractInteraction contract={contract} account={account} />
             )}

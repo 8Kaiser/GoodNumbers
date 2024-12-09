@@ -2,7 +2,7 @@ export const networkConfig = {
   // Arbitrum Sepolia testnet
   421614: {
     networkName: "Arbitrum Sepolia",
-    contractAddress: "0x06a0d9103d9dcd80eAd075379736A5FdFB4B3430",
+    contractAddress: "0x82B70e676fE07f67ec07a3171C6aC42e8a7deb1B",
   },
   
   // Sepolia testnet

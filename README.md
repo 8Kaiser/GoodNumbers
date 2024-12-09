@@ -24,7 +24,7 @@ To deploy GoodNumbers, you need to have the following API KEYS:
 
 ### DEPENDENCY INSTALLATION
 
-Additionally, you will need to have the following dependencies:
+Additionally, for backend development you will need to have the following dependencies:
 
     NPM
     NPX
@@ -41,9 +41,17 @@ Which you can install with the following commands:
     npm install --save-dev @nomicfoundation/hardhat-toolbox
     npx hardhat compile
 
-To make your personal testing interacting with the user interfaces just:
+For frontend development we implement React + Vite so you need to install the following:
 
-    npm run dev
+	npm create vite@latest
+	npm install
+	npm install ethers
+	npm install prop-types
+	npm install ethers react-toastify @radix-ui/react-icons shadcn-ui
+
+Then just run the local server:
+
+  npm run dev
 
 ### CONTRACT DEPLOYMENT ON LOCAL HARDHAT HOW TO
 

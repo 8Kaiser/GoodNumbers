@@ -14,17 +14,17 @@ In our opinion, this blend of adversarial and altruistic motivations allows for 
 
 ## Deployment
 
-### CREDENCIALES NECESARIAS PARA EL DEPLOYMENT
+### CREDENTIALS REQUIRED FOR DEPLOYMENT
 
-Para poder Deployear GoodNumbers necesitas contar con las siguientes API KEYS:
+To deploy GoodNumbers, you need to have the following API KEYS:
 
 	Alchemy API KEY
 	Arbiscan API KEY
 	Etherscan API KEY
 
-### INSTALACION DE DEPENDENCIAS
+### DEPENDENCY INSTALLATION
 
-Adicionalmente vas a requerir contar con las siguientes dependencias:
+Additionally, you will need to have the following dependencies:
 
 	NPM
 	NPX
@@ -32,7 +32,7 @@ Adicionalmente vas a requerir contar con las siguientes dependencias:
 	HardHat
 	ethers.js
 
-Que puedes instalar con los siguientes comandos:
+Which you can install with the following commands:
 
 	npm init -y 
 	npm install --save-dev hardhat
@@ -41,21 +41,21 @@ Que puedes instalar con los siguientes comandos:
 	npm install --save-dev @nomicfoundation/hardhat-toolbox
 	npx hardhat compile
 
-### DEPLOYAR EL CONTRATO EN HARDHAT LOCAL
+### CONTRACT DEPLOYMENT ON LOCAL HARDHAT HOW TO
 
-Para Deployar el contracto en un entorno Hardhat local sigue los siguientes pasos:
+To deploy the contract in a local Hardhat environment, follow these steps:
 
-	Ingresa a la carpeta contract
+	In the contract folder execute:
 	npx hardhat node
 	npx hardhat run scripts/deploy.js --network localhost
 	
-	Conectar a una nueva red en MetaMask:		
+	In MetaMask, connect to a new network:		
 		Nombre de la red: Localhost 8545
 		URL de la red: http://127.0.0.1:8545
 		ID de la cadena: 1337 
 		Moneda: ETH
 
-### DEPLOYAR EL CONTRATO EN SEPOLIA
+### CONTRACT DEPLOYMENT ON SEPOLIA NETWORK HOW TO
 
 Para Deployar el contracto en la red de pruebas Sepolia sigue los siguientes pasos:
 
@@ -163,11 +163,11 @@ Project authors (in alphabetical order):
 - Hoover Zavala - https://github.com/pseeker33
 - Juan Pablo Kaiser - https://github.com/8Kaiser
 
+  
 
+  
 
-
-
-
+  
 
 # GoodNumbers
 
